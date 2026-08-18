@@ -26,13 +26,14 @@ class Restaurante:
         self._ativo = not self._ativo # caso o valor seja Falso passa a ser Verdadeiro e caso o valor seja Verdadeiro passa a ser Falso
 
     def receber_avaliacao(self, cliente, nota):
-        avaliacao = Avaliacao(cliente, nota)
-        self._avaliacao.append(avaliacao)
-
+        if 0 < nota <=5:
+            avaliacao = Avaliacao(cliente, nota)
+            self._avaliacao.append(avaliacao)
+        
     @property
     def media_avaliacao(self):
         if not self._avaliacao:
-            return 0 
+            return 'Restaurante Novo'
         soma_das_notas = sum(avaliacao._nota for avaliacao in self._avaliacao)
         media =  round(soma_das_notas / len(self._avaliacao), 1)
         return media
